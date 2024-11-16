@@ -1,0 +1,58 @@
+<div class="sidebar">
+    <h3 class="text-center">Menu</h3>
+    <div class="menu-buttons">
+        <a href="dashboard.html" class="btn btn-dark w-100 mb-2">Dashboard</a>
+        <a href="contas.html" class="btn btn-dark w-100">Contas a Pagar</a>
+    </div>
+    <div class="logout-button">
+        <button class="btn btn-outline-light w-100" onclick="logout()">Sair</button>
+    </div>
+</div>
+
+<script>
+    function logout() {
+        sessionStorage.removeItem('token');
+        window.location.href = 'login.html';
+    }
+</script>
+
+<style>
+    .sidebar {
+        background-color: #343a40;
+        color: white;
+        height: 100vh;
+        width: 250px;
+        padding-top: 20px;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .menu-buttons {
+        padding: 10px 20px;
+        display: block;
+        flex-direction: column;
+    }
+
+    .btn-dark {
+        color: white;
+        text-align: center;
+        background-color: #495057;
+        border: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-dark:hover {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .logout-button {
+        padding: 10px 20px;
+    }
+
+    .logout-button button {
+        font-size: 14px;
+    }
+</style>
