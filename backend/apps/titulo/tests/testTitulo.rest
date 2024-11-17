@@ -1,0 +1,70 @@
+### Necessário para pegar o token
+### Post
+# @name loginAutenticado
+POST http://localhost:40000/login HTTP/1.1
+content-type: application/json
+
+{    
+    "LoginUsuario": "teste",
+    "SenhaUsuario": "teste"
+}
+### Seta o token
+@accessToken = {{loginAutenticado.response.body.$.token}}
+@username = {{loginAutenticado.response.body.$.username}}
+
+
+
+### teste de inserção de titulo
+POST http://localhost:40000/insertTitulo HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    "idTitulo": 0,
+    "descricaoTitulo": "Gastos com Reforma",
+    "valorTitulo": 5500.00,
+    "dataVencimentoTitulo": "2024-12-12",
+    "removidoTitulo": false
+}
+
+### teste de buscar todos os Titulo
+GET http://localhost:40000/getAllTitulo HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    
+}
+
+### teste de buscar Titulo por ID
+POST http://localhost:40000/getTituloByID HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    "idTitulo": 1
+}
+
+
+
+### teste de atualização de Titulo
+POST http://localhost:40000/updateTitulo HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    "idTitulo": 1,
+    "descricaoTitulo": "Farmácia",
+    "valorTitulo": 300.00,
+    "dataVencimentoTitulo": "2024-11-02",
+    "removidoTitulo": false
+}
+
+### teste de atualização de Titulo
+POST http://localhost:40000/deleteTitulo HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    "idTitulo": 4
+}
