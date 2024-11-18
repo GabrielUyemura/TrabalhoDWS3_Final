@@ -1,20 +1,17 @@
-
--- TABELA USUARIO (USUÁRIOS DO SISTEMA)
-CREATE TABLE usuario (
-    idUsuario SERIAL PRIMARY KEY,
-    loginUsuario VARCHAR(50) NOT NULL UNIQUE,
-    senhaUsuario VARCHAR(255) NOT NULL,
-    removidoUsuario BOOLEAN DEFAULT FALSE
+create table IF NOT EXISTS usuario (
+    idUsuario bigserial constraint pk_usuario PRIMARY KEY,
+    loginUsuario varchar(10) UNIQUE,
+    senhaUsuario text,
+    removidoUsuario boolean DEFAULT false
 );
 
--- INSERÇÃO DE USUÁRIOS
-INSERT INTO usuario (loginUsuario, senhaUsuario, removidoUsuario)
-VALUES ('admin', 'admin', FALSE);
+CREATE EXTENSION if NOT EXISTS pgcrypto;
 
-INSERT INTO usuario (loginUsuario, senhaUsuario, removidoUsuario)
-VALUES ('teste', 'teste', FALSE);
+insert into usuario values 
+    (default, 'admin', crypt('admin', gen_salt('bf'))), -- senha criptografada com bcrypt
+    (default, 'teste', crypt('teste', gen_salt('bf'))) -- senha criptografada com bcrypt
+ON CONFLICT DO NOTHING;
 
--- TABELA TITULO (CONTAS A PAGAR)
 CREATE TABLE titulo (
     idTitulo SERIAL PRIMARY KEY,
     descricaoTitulo VARCHAR(255) NOT NULL,
