@@ -79,8 +79,9 @@ const deleteTitulo = async (tituloREGPar) => {
   try {
     linhasAfetadas = (
       await db.query(
-        "UPDATE titulo SET removidoTitulo = true WHERE idTitulo = $1",
-        [tituloREGPar.idTitulo]
+        "UPDATE titulo SET removidoTitulo = true " + 
+            "WHERE idTitulo = $1",
+        [tituloREGPar.idtitulo]
       )
     ).rowCount;
   } catch (error) {
